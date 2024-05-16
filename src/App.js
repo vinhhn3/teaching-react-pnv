@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Banner from "./components/Banner";
+import Card from "./components/Card";
+import USERSDATA from "./data/data";
 
 function App() {
+  const age = 25;
+  const [hidden, setHidden] = useState(true);
+  console.log(hidden);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={() => setHidden(!hidden)}>Toogle</button>
+      {hidden && <Banner />}
+
+      <Banner />
+
+      <Card />
+      <Card name="John Doe" age={age} address="123 Main St, City, State" />
+
+      {USERSDATA.map((user, index) => (
+        <Card
+          // key={user.id}
+          key={index}
+          name={user.name}
+          age={user.age}
+          address={user.address}
+        />
+      ))}
     </div>
   );
 }

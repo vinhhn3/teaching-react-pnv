@@ -1,7 +1,7 @@
 import React from "react";
 
 function Card(props) {
-  const { name, age, address } = props; // Destructuring props
+  const { name, age, address } = props.user; // Destructuring props
   return (
     <div>
       <h2>Card Info</h2>

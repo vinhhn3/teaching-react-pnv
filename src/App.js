@@ -8,13 +8,13 @@ function App() {
 
   const handleForm = (event) => {
     event.preventDefault();
-    setUser((previous) => {
-      console.log(previous);
-      previous = {
-        username: username,
-        password: password,
-      };
-    });
+    setUser(
+      (previous) =>
+        (previous = {
+          username: username,
+          password: password,
+        })
+    );
 
     console.log(user);
   };
@@ -25,6 +25,10 @@ function App() {
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleSelect = (event) => {
+    console.log("select");
   };
 
   return (
@@ -40,7 +44,7 @@ function App() {
           <input type="password" onChange={handleChangePassword} />
         </div>
         <div>
-          <select>
+          <select onSelect={handleSelect}>
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
@@ -58,6 +62,7 @@ function App() {
         </div>
       </form>
       <h2>Form Data</h2>
+      <p>Username: {user.username}</p>
     </div>
   );
 }

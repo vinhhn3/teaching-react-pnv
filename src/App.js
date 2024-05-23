@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import "./App.css";
 
@@ -8,8 +9,10 @@ function App() {
   const [age, setAge] = useState(0);
   const [gender, setGender] = useState("female");
   const [user, setUser] = useState({});
+  const [data, setData] = useState({});
+  const [posts, setPosts] = useState([{}]);
 
-  const handleForm = (event) => {
+  const handleForm = async (event) => {
     event.preventDefault();
     if (age < 0) {
       alert("Age cannot be negative");
@@ -22,6 +25,20 @@ function App() {
       isSelected: isSelected,
       age: age,
     }));
+
+    const res = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      user
+    );
+
+    console.log(res.data);
+    setData(res.data);
+
+    const getRes = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    console.log(getRes);
+    setPosts(getRes.data);
   };
 
   const handelChangeUsername = (event) => {
@@ -81,6 +98,10 @@ function App() {
       <p>Gender: {user.gender}</p>
       <p>Is selected: {isSelected ? "Yes" : "No"}</p>
       <p>Age: {user.age}</p>
+      <h2>Result from api</h2>
+      <p>Data id: {data.id}</p>
+      <p>Username:{data.username} </p>
+      <p>Password: {data.password} </p>
     </div>
   );
 }

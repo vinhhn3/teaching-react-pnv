@@ -15,16 +15,13 @@ function App() {
       alert("Age cannot be negative");
       return;
     }
-    setUser(
-      (previous) =>
-        (previous = {
-          username: username,
-          password: password,
-          gender: gender,
-          isSelected: isSelected,
-          age: age,
-        })
-    );
+    setUser(() => ({
+      username: username,
+      password: password,
+      gender: gender,
+      isSelected: isSelected,
+      age: age,
+    }));
   };
 
   const handelChangeUsername = (event) => {

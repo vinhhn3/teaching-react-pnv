@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import DataTable from "react-data-table-component";
 import "./App.css";
 
 function App() {
@@ -11,6 +12,26 @@ function App() {
   const [user, setUser] = useState({});
   const [data, setData] = useState({});
   const [posts, setPosts] = useState([{}]);
+
+  const columns = [
+    {
+      name: "Id",
+      selector: (row) => row.id,
+    },
+    {
+      name: "UserId",
+      selector: (row) => row.userId,
+      sortable: true,
+    },
+    {
+      name: "Title",
+      selector: (row) => row.title,
+    },
+    {
+      name: "Body",
+      selector: (row) => row.body,
+    },
+  ];
 
   const handleForm = async (event) => {
     event.preventDefault();
@@ -102,6 +123,8 @@ function App() {
       <p>Data id: {data.id}</p>
       <p>Username:{data.username} </p>
       <p>Password: {data.password} </p>
+      <h2>Table</h2>
+      <DataTable columns={columns} data={posts} pagination />
     </div>
   );
 }
